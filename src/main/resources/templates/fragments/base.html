@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Default Title</title>
+</head>
+<body>
+    <!-- Common header fragment -->
+    <div th:replace="fragments/header :: header"></div>
+
+    <!-- Content placeholder -->
+    <div th:replace="${content}"></div>
+
+    <!-- Common footer fragment -->
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

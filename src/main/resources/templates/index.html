@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout(~{::content})}"></html> -->
+<html xmlns:th="http://www.thymeleaf.org"></html>
+    <head th:replace="fragments/base :: head (title='This is the index page')"></head>
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div th:fragment="content">
+            <h2>THIS IS A TEXT</h2>
+            <p>Lorem ipsum</p>
+        </div>
+
+    </body>
+</html>
+
