@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div th:fragment="header">
+    <header th:fragment="header">
         <!-- Header content -->
-        <h1>My Website</h1>
-        <nav>
-            <!-- Navigation links -->
+        <!-- <h1>My Website</h1> -->
+        <nav class="blurrable navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" id="login" href="#">Login</a> 
+                    <!-- <a class="nav-item nav-link" id="login" href="{{ url_for('auth.login') }}">Login</a>  -->
+                    <!-- <a class="nav-item nav-link" id="signUp" href="{{ url_for('auth.sign_up') }}">Sign Up</a> -->
+                </div>
+            </div>
         </nav>
-    </div>
+    </header>
 </body>
 </html>

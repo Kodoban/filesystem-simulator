@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <!-- <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/base :: layout(~{::content})}"></html> -->
-<html xmlns:th="http://www.thymeleaf.org"></html>
-    <head th:replace="fragments/base :: head (title='This is the index page')"></head>
+<html xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <th:block th:replace="~{fragments/base :: head (title='This is the index page')}"></th:block>
+        <th:block th:fragment="~{fragments/base :: additionalCss}">
+            <link rel="stylesheet" th:href="@{/css/index.css}">
+        </th:block>
+    </head>
+
     <body>
-        <div th:replace="fragments/header :: header"></div>
-        <div th:fragment="content">
+        <div th:replace="~{fragments/header :: header}"></div>
+        <main th:fragment="~{fragments/base :: mainContent}">
             <h2>THIS IS A TEXT</h2>
             <p>Lorem ipsum</p>
-        </div>
-
+        </main>
     </body>
 </html>
 

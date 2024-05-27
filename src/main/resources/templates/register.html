@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"></html>
 
     <head>
-        <th:block th:replace="~{fragments/base :: head (title='Login')}"></th:block>
+        <th:block th:replace="~{fragments/base :: head (title='Sign up')}"></th:block>
         <th:block th:fragment="~{fragments/base :: additionalCss}">
-            <link rel="stylesheet" th:href="@{/css/login.css}">
+            <link rel="stylesheet" th:href="@{/css/register.css}">
         </th:block>
     </head>
 
@@ -12,19 +12,8 @@
     <body>
         <div th:replace="~{fragments/header :: header}"></div>
         <main th:fragment="~{fragments/base :: mainContent}" class="content">
-
-            <div th:if="${param.success}">
-                You successfully registered. Please use your credentials to log in.
-            </div>
-            <div th:if="${param.error}">
-                Error occurred.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
-
-            <form method="POST" th:action="@{/auth/login}" th:object="${user}">
-                <h3 align="center">Log in</h3>
+            <form method="POST" th:action="@{/auth/register}" th:object="${user}">
+                <h3 align="center">Sign up</h3>
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>
                     <input th:field="*{username}" placeholder="Enter username" type="text" class="form-control">
@@ -35,7 +24,7 @@
                     <input th:field="*{password}" placeholder="Enter a password" type="password" class="form-control">
                 </div>
                 <br>
-                <button id="loginButton" type="submit" class="btn btn-primary col-12">Log in</button>
+                <button id="registerButton" type="submit" class="btn btn-primary col-12">Sign up</button>
             </form>
         </main>
     </body>

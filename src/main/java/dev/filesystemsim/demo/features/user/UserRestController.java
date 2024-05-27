@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +44,7 @@ public class UserRestController {
                 .collect(Collectors.toList());
     }
 
-    // @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Integer id) {
         Optional<UserEntity> user = userService.getUser(id);
         return user.map(userEntity -> {
@@ -52,18 +52,18 @@ public class UserRestController {
                 return new ResponseEntity<>(userDto, HttpStatus.OK);
             }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    public ResponseEntity<UserDto> getUserByUsername(String username) {
+        Optional<UserEntity> user = userService.getUser(username);
+        return user.map(userEntity -> {
+                UserDto userDto = userMapper.mapEntityToDto(userEntity);
+                return new ResponseEntity<>(userDto, HttpStatus.OK);
+            }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     
     // POST
-
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
-        UserEntity userEntity = userMapper.mapDtoToEntity(userDto);
-        UserEntity savedUserEntity = userService.save(userEntity);
-        return new ResponseEntity<>(
-            userMapper.mapEntityToDto(savedUserEntity),
-            HttpStatus.CREATED
-        );
-    }
+    // Registration handled by Authentication Controller
+    
 
     // PATCH
 

@@ -26,5 +26,4 @@ public class UserMapper implements Mapper<UserEntity, UserDto> {
         return modelMapper.map(userEntity, UserDto.class);
     }
 
-
 }

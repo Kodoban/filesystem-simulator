@@ -13,6 +13,8 @@ public interface UserService {
 
     Optional<UserEntity> getUser(Integer id);
 
+    Optional<UserEntity> getUser(String username);
+
     boolean isExists(Integer id);
 
     boolean usernameTaken(Integer id, String username);

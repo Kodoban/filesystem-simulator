@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import dev.filesystemsim.demo.features.user.UserRepository;
@@ -11,9 +15,12 @@ import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import dev.filesystemsim.demo.features.user.exceptions.UsernameAlreadyExistsException;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
+
+    // Initialize if all else
+    // private PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -43,6 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserEntity> getUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public boolean isExists(Integer id) {
         return userRepository.existsById(id);
     }
@@ -57,7 +69,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setId(id);
         return userRepository.findById(id).map(existingUser -> {
             Optional.ofNullable(userEntity.getUsername()).ifPresent(existingUser::setUsername);
-            Optional.ofNullable(userEntity.getPasswordHash()).ifPresent(existingUser::setPasswordHash);
+            Optional.ofNullable(userEntity.getPassword()).ifPresent(existingUser::setPassword);
             return userRepository.save(existingUser);
             
         }).orElseThrow(() -> new RuntimeException("User does not exist"));
@@ -67,6 +79,13 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found"));
+    }
+
+    
 
     
 }
