@@ -17,6 +17,7 @@ import dev.filesystemsim.demo.features.role.Role;
 import dev.filesystemsim.demo.features.role.RoleRepository;
 import dev.filesystemsim.demo.features.user.UserRepository;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
+// import dev.filesystemsim.demo.utils.TokenService;
 import dev.filesystemsim.demo.utils.TokenService;
 
 @Service
@@ -31,6 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final RoleRepository roleRepository;
 
     public AuthenticationServiceImpl(UserRepository userRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, TokenService tokenService, RoleRepository roleRepository) {
+    // public AuthenticationServiceImpl(UserRepository userRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
@@ -65,7 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             );
 
             String token = tokenService.generateJwt(auth);
-
+            // String token = "TODO: Add JWT later";
             return token;
             
         } catch (BadCredentialsException e) {

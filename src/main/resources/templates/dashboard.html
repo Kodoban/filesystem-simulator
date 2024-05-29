@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <th:block th:replace="~{fragments/base :: head (title='Login')}"></th:block>
         <th:block th:fragment="~{fragments/base :: additionalCss}">
-            <link rel="stylesheet" th:href="@{/css/auth_pages.css}">
+            <!-- <link rel="stylesheet" th:href="@{/css/auth_pages.css}"> -->
         </th:block>
     </head>
 
     <!-- https://bootify.io/spring-security/form-login-with-spring-boot-thymeleaf.html -->
     <body>
-        <th:block th:replace="~{fragments/header :: header}"></th:block>
+        <!-- <p>E</p>
+        <th:block sec:authorize="isAuthenticated()">
+            <p>Welcome <span sec:authentication="name"></span></p>
+            <p>Or <span sec:authentication="principal.username"></span></p>
+        </th:block>
+        <th:block sec:authorize="!isAuthenticated()">
+            <p>Hello</p>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <p>Hello 2</p>
+        </th:block> -->
+        <!-- <th:block th:replace="~{fragments/header :: header}"></th:block>
         <main th:fragment="~{fragments/base :: mainContent}" class="content">
-
-            <th:block sec:authorize="isAuthenticated()">
-                <p>Welcome <span sec:authentication="name"></span></p>
-                <p>Or <span sec:authentication="principal.username"></span></p>
-            </th:block>
-            <th:block sec:authorize="!isAuthenticated()">
-                <p>Hello</p>
-            </th:block>
 
             <div th:if="${param.success}">
                 You successfully registered. Please use your credentials to log in.
@@ -31,7 +34,7 @@
                 You have been logged out.
             </div>
 
-            <form method="POST" th:action="@{/login}" th:object="${user}">
+            <form method="POST" th:action="@{/auth/login}" th:object="${user}">
                 <h3 align="center">Log in</h3>
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>
@@ -44,7 +47,7 @@
                 </div>
                 <br>
                 <button id="loginButton" type="submit" class="btn btn-primary col-12">Log in</button>
-            </form>
+            </form> -->
         </main>
     </body>
 </html>

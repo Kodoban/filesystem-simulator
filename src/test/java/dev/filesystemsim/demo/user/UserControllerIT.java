@@ -14,10 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.filesystemsim.demo.TestDataUtil;
-import dev.filesystemsim.demo.controllerMappings.ControllerMapping;
 import dev.filesystemsim.demo.features.user.definition.UserDto;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import dev.filesystemsim.demo.features.user.service.UserService;
+import dev.filesystemsim.demo.urlMappings.UrlMapping;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -42,7 +42,7 @@ public class UserControllerIT {
         String userJson = objectMapper.writeValueAsString(testUserEntityA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post(ControllerMapping.USER_REST_CONTROLLER_URL + "")
+            MockMvcRequestBuilders.post(UrlMapping.USER_REST_CONTROLLER_URL + "")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(userJson)
         ).andExpect(
@@ -59,7 +59,7 @@ public class UserControllerIT {
         String userJson = "{\"username\": \"Sam\", \"passwordHash\": \"123123\"}";
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post(ControllerMapping.USER_REST_CONTROLLER_URL + "")
+                MockMvcRequestBuilders.post(UrlMapping.USER_REST_CONTROLLER_URL + "")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(userJson)
         ).andExpect(
@@ -74,7 +74,7 @@ public class UserControllerIT {
     @Test
     public void testThatListUsersReturnsHttpStatus200() throws Exception {
         mockMvc.perform(
-            MockMvcRequestBuilders.get(ControllerMapping.USER_REST_CONTROLLER_URL + "")
+            MockMvcRequestBuilders.get(UrlMapping.USER_REST_CONTROLLER_URL + "")
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.status().isOk()
@@ -87,7 +87,7 @@ public class UserControllerIT {
         userService.save(testUserEntityA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get(ControllerMapping.USER_REST_CONTROLLER_URL + "")
+            MockMvcRequestBuilders.get(UrlMapping.USER_REST_CONTROLLER_URL + "")
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.jsonPath("$[0].id").value(testUserEntityA.getId())
@@ -104,7 +104,7 @@ public class UserControllerIT {
         userService.save(testUserEntityA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + testUserEntityA.getId())
+            MockMvcRequestBuilders.get(UrlMapping.USER_REST_CONTROLLER_URL + "/" + testUserEntityA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.status().isOk()
@@ -114,7 +114,7 @@ public class UserControllerIT {
     @Test
     public void testThatGetOneUserReturnsHttpStatus404WhenUserNotExists() throws Exception {
         mockMvc.perform(
-            MockMvcRequestBuilders.get(ControllerMapping.USER_REST_CONTROLLER_URL + "/1")
+            MockMvcRequestBuilders.get(UrlMapping.USER_REST_CONTROLLER_URL + "/1")
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.status().isNotFound()
@@ -127,7 +127,7 @@ public class UserControllerIT {
         userService.save(testUserEntityA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + testUserEntityA.getId())
+            MockMvcRequestBuilders.get(UrlMapping.USER_REST_CONTROLLER_URL + "/" + testUserEntityA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.jsonPath("$.id").value(testUserEntityA.getId())
@@ -148,7 +148,7 @@ public class UserControllerIT {
         String userAUpdatedJson = objectMapper.writeValueAsString(testUserDtoA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.patch(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
+            MockMvcRequestBuilders.patch(UrlMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(userAUpdatedJson)
         ).andExpect(
@@ -163,7 +163,7 @@ public class UserControllerIT {
         String userAUpdatedJson = objectMapper.writeValueAsString(testUserDtoA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.patch(ControllerMapping.USER_REST_CONTROLLER_URL + "/1")
+            MockMvcRequestBuilders.patch(UrlMapping.USER_REST_CONTROLLER_URL + "/1")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(userAUpdatedJson)
         ).andExpect(
@@ -184,7 +184,7 @@ public class UserControllerIT {
         String userAUpdatedJson = objectMapper.writeValueAsString(testUserDtoA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.patch(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
+            MockMvcRequestBuilders.patch(UrlMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(userAUpdatedJson)
         ).andExpect(
@@ -202,7 +202,7 @@ public class UserControllerIT {
         String userAUpdatedJson = objectMapper.writeValueAsString(testUserDtoA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.patch(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
+            MockMvcRequestBuilders.patch(UrlMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(userAUpdatedJson)
         ).andExpect(
@@ -220,7 +220,7 @@ public class UserControllerIT {
         UserEntity savedUserA = userService.save(testUserEntityA);
 
         mockMvc.perform(
-            MockMvcRequestBuilders.delete(ControllerMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
+            MockMvcRequestBuilders.delete(UrlMapping.USER_REST_CONTROLLER_URL + "/" + savedUserA.getId())
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.status().isNoContent()
@@ -230,7 +230,7 @@ public class UserControllerIT {
     @Test
     public void testThatDeleteUserReturnsHttpStatus204IfUserNotExists() throws Exception {
         mockMvc.perform(
-            MockMvcRequestBuilders.delete(ControllerMapping.USER_REST_CONTROLLER_URL + "/1")
+            MockMvcRequestBuilders.delete(UrlMapping.USER_REST_CONTROLLER_URL + "/1")
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(
             MockMvcResultMatchers.status().isNoContent()

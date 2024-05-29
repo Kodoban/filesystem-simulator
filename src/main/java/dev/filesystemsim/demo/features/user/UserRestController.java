@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.filesystemsim.demo.controllerMappings.ControllerMapping;
 import dev.filesystemsim.demo.features.user.definition.UserDto;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import dev.filesystemsim.demo.features.user.mapper.UserMapper;
 import dev.filesystemsim.demo.features.user.service.UserService;
+import dev.filesystemsim.demo.urlMappings.UrlMapping;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(ControllerMapping.USER_REST_CONTROLLER_URL)
+@RequestMapping(UrlMapping.USER_REST_CONTROLLER_URL)
 public class UserRestController {
 
     private final UserService userService;

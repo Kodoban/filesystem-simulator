@@ -27,7 +27,8 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
-import dev.filesystemsim.demo.controllerMappings.ControllerMapping;
+import dev.filesystemsim.demo.features.user.service.UserServiceImpl;
+import dev.filesystemsim.demo.urlMappings.UrlMapping;
 import dev.filesystemsim.demo.utils.RSAKeyProperties;
 
 @Configuration
@@ -45,28 +46,32 @@ public class SecurityConfiguration {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers(
-                    "/",
-                    ControllerMapping.AUTH_CONTROLLER_URL + "/**",
-                    ControllerMapping.AUTH_REST_CONTROLLER_URL + "/**"
-                ).permitAll();
-                // auth.requestMatchers("/admin/**").hasRole("ADMIN");
-                // auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
-                auth.anyRequest().authenticated();
-            });
-
-        http
-            .formLogin(form -> form.loginPage(ControllerMapping.AUTH_CONTROLLER_URL + "/login")
-                    // .defaultSuccessUrl(ControllerMapping.DEFAULT_SUCCESS_URL, true)
-                    .defaultSuccessUrl("/", true)
-                    .permitAll())
+                // auth.requestMatchers(
+                //     // "/",
+                //     // UrlMapping.DASHBOARD_CONTROLLER_URL + "/**",
+                //     UrlMapping.CSS_DIR + "/**",
+                //     UrlMapping.JS_DIR + "/**",
+                //     UrlMapping.AUTH_CONTROLLER_URL + "/**",
+                //     UrlMapping.AUTH_REST_CONTROLLER_URL + "/**"
+                // ).permitAll();
+                // // auth.requestMatchers("/dashboard/**").hasAnyRole("ADMIN", "USER");
+                // // auth.requestMatchers("/admin/**").hasRole("ADMIN");
+                // // auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
+                // auth.anyRequest().authenticated();
+                auth.anyRequest().permitAll();
+            })
+            .formLogin(form -> form.loginPage(UrlMapping.AUTH_CONTROLLER_URL + "/login")
+                    .defaultSuccessUrl(UrlMapping.DEFAULT_SUCCESS_URL, true)
+                    .permitAll()
+                )
+            // .logout(logout -> logout.logoutUrl(UrlMapping.AUTH_CONTROLLER_URL + "/logout"));
             .logout(LogoutConfigurer::permitAll);
 
         http
             .oauth2ResourceServer(oauth2 -> 
                 oauth2.jwt(jwt -> jwt.decoder(jwtDecoder()))
             );
-            
+   
         http
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dev.filesystemsim.demo.controllerMappings.ControllerMapping;
 import dev.filesystemsim.demo.features.user.definition.UserDto;
+import dev.filesystemsim.demo.urlMappings.UrlMapping;
 
 @Controller
-@RequestMapping(ControllerMapping.USER_CONTROLLER_URL)
+@RequestMapping(UrlMapping.USER_CONTROLLER_URL)
 public class UserViewController {
 
     private final UserRestController userRestController;
@@ -31,7 +31,7 @@ public class UserViewController {
         List<UserDto> users = userRestController.getAllUsers();
 
         model.addAttribute("users", users);
-        model.addAttribute("userListLink", ControllerMapping.USER_REST_CONTROLLER_URL);
+        model.addAttribute("userListLink", UrlMapping.USER_REST_CONTROLLER_URL);
         return "base"; 
     }
 
