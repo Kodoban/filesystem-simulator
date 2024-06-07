@@ -1,7 +1,7 @@
 package dev.filesystemsim.demo.features.homeDirectory;
 
 import dev.filesystemsim.demo.features.directory.Directory;
-import dev.filesystemsim.demo.features.filesystem.Filesystem;
+import dev.filesystemsim.demo.features.filesystem.definition.FilesystemEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
@@ -23,6 +23,6 @@ import lombok.experimental.SuperBuilder;
 public class HomeDirectory extends Directory {
 
     @OneToOne(mappedBy = "homeDirectory", cascade = CascadeType.ALL)
-    private Filesystem parentFilesystem;
+    private FilesystemEntity parentFilesystem;
 
 }

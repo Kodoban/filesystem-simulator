@@ -1,5 +1,6 @@
 package dev.filesystemsim.demo.features.user.definition;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class UserDto {
     
+    @JsonAlias({"owner"})
     private Integer id;
     private String username;
     @JsonProperty(access = Access.WRITE_ONLY)

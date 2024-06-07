@@ -1,0 +1,36 @@
+<div th:fragment="filesystemCreatePopupFragment" id="popupForm">
+    <h3 id="popupHeader">Create a new filesystem</h3>
+    <p id="popupText">Enter the required filesystem details</p>
+
+    <!-- Change value to dynamic user value -->
+    <input id="ownerId" name="owner_id" th:value="1" hidden="true">
+    <textarea id="filesystemName" name="filesystem_name" class="form-control" placeholder="Enter a name for the new filesystem"></textarea>
+    <button type="submit" id="createFilesystemBtn" name="create" class="btn btn-primary" onclick="createFilesystem()">Create</button>
+    <button type="button" id="cancelPopup" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
+</div>
+
+<div th:fragment="filesystemDeletePopupFragment" id="popupForm">
+    <h3 id="popupHeader">Delete the filesystem?</h3>
+    <p id="popupText">You are about to delete this filesystem. This action is not reversible. Proceed?</p>
+
+    <!-- <input name="filesystem_uuid" th:value="${filesystem.uuid}" hidden="true">
+    <input name="filesystem_name" th:value="${filesystem.name}" hidden="true"> -->
+    <button type="submit" id="deleteFilesystemBtn" name="delete" class="btn btn-outline-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="deleteFilesystem(this.getAttribute('filesystem-uuid'))">Delete</button>
+    <button type="button" id="cancelPopupBtn" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
+</div>
+
+<li th:fragment="newFilesystemFragment" th:id="${filesystem.uuid}" class="filesystem-list-item list-group-item d-flex align-items-center justify-content-between">
+    <p th:text="${filesystem.name}"></p>
+    <div class="d-flex align-items-center justify-content-right">
+        <button type="button" name="open" class="btn btn-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="openFilesystemPage(this.getAttribute('filesystem-uuid'))">Open</button>
+        <button type="button" name="delete" class="btn btn-outline-danger" 
+            data-th-filesystem-uuid="${filesystem.uuid}" data-th-filesystem-name="${filesystem.name}" 
+            onclick="raiseDeleteFilesystemPopup(this.getAttribute('filesystem-uuid'), this.getAttribute('filesystem-name'))">
+            Delete
+        </button>
+    </div>
+
+    <!-- <<a class="link-primary d-flex" th:href="@{/filesystem/{uuid}(uuid=${filesystem.uuid})}" ></a>> -->
+    
+    
+</li>

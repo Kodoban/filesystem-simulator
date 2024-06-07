@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import dev.filesystemsim.demo.features.filesystem.Filesystem;
+import dev.filesystemsim.demo.features.filesystem.definition.FilesystemEntity;
 import dev.filesystemsim.demo.features.role.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -48,8 +48,8 @@ public class UserEntity implements UserDetails {
     @NotBlank
     private String password;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Filesystem> systems;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    private List<FilesystemEntity> systems;
 
     @NotEmpty
     @ManyToMany(fetch=FetchType.EAGER)
