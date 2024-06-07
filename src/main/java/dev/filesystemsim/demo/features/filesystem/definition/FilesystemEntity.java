@@ -2,7 +2,7 @@ package dev.filesystemsim.demo.features.filesystem.definition;
 
 import java.util.UUID;
 
-import dev.filesystemsim.demo.features.homeDirectory.definition.HomeDirectoryEntity;
+import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.subclasses.homeDirectory.definition.HomeDirectoryEntity;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,7 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
