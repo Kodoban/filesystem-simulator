@@ -23,7 +23,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper=true) //TODO: Check if Override required
 public class DirectoryEntity extends FileEntity {
 
-    @OneToMany(mappedBy = "parentDirectory", cascade = CascadeType.ALL)
+    // @OneToMany(mappedBy = "parentDirectory", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<FileEntity> files;
     
 }

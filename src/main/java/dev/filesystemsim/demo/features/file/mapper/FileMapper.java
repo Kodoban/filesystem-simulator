@@ -1,11 +1,13 @@
 package dev.filesystemsim.demo.features.file.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import dev.filesystemsim.demo.features.file.definition.FileDto;
 import dev.filesystemsim.demo.features.file.definition.FileEntity;
 import dev.filesystemsim.demo.interfaces.Mapper;
 
+@Component
 public class FileMapper implements Mapper<FileEntity, FileDto>{
 
     private ModelMapper modelMapper;

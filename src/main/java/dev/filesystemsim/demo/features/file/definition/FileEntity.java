@@ -38,7 +38,8 @@ public class FileEntity {
 
     private String content;
 
-    // @ManyToOne(cascade = CascadeType.ALL)
+    // @ManyToOne
+    // // @ManyToOne(cascade = CascadeType.ALL)
     // @JoinColumn(name = "parent_directory_id")
     // private DirectoryEntity parentDirectory;
 }
