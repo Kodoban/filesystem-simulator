@@ -2,7 +2,7 @@ package dev.filesystemsim.demo.features.filesystem.definition;
 
 import java.util.UUID;
 
-import dev.filesystemsim.demo.features.homeDirectory.HomeDirectory;
+import dev.filesystemsim.demo.features.homeDirectory.definition.HomeDirectoryEntity;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -46,6 +46,6 @@ public class FilesystemEntity {
     // @Column(nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "home_directory_id", referencedColumnName = "id")
-    private HomeDirectory homeDirectory;
+    private HomeDirectoryEntity homeDirectory;
     
 }

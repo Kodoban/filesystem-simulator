@@ -1,10 +1,11 @@
-package dev.filesystemsim.demo.features.homeDirectory;
+package dev.filesystemsim.demo.features.directory.definition;
 
-import dev.filesystemsim.demo.features.directory.Directory;
-import dev.filesystemsim.demo.features.filesystem.definition.FilesystemEntity;
+import java.util.List;
+
+import dev.filesystemsim.demo.features.file.definition.FileEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,11 +19,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Getter @SuperBuilder
 @Entity
-@Table(name="home_directory")
+@Table(name="directory")
 @EqualsAndHashCode(callSuper=true) //TODO: Check if Override required
-public class HomeDirectory extends Directory {
+public class DirectoryEntity extends FileEntity {
 
-    @OneToOne(mappedBy = "homeDirectory", cascade = CascadeType.ALL)
-    private FilesystemEntity parentFilesystem;
-
+    @OneToMany(mappedBy = "parentDirectory", cascade = CascadeType.ALL)
+    private List<FileEntity> files;
+    
 }

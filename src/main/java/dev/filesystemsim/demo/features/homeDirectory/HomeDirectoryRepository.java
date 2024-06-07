@@ -2,9 +2,9 @@ package dev.filesystemsim.demo.features.homeDirectory;
 
 import org.springframework.stereotype.Repository;
 
-import dev.filesystemsim.demo.features.file.FileRepository;
+import dev.filesystemsim.demo.features.directory.DirectoryRepository;
 
 @Repository
-public interface HomeDirectoryRepository extends FileRepository {
+public interface HomeDirectoryRepository extends DirectoryRepository {
 
 }

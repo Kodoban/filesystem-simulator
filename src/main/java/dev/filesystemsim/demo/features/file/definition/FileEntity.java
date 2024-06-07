@@ -1,6 +1,6 @@
-package dev.filesystemsim.demo.features.file;
+package dev.filesystemsim.demo.features.file.definition;
 
-import dev.filesystemsim.demo.features.directory.Directory;
+import dev.filesystemsim.demo.features.directory.definition.DirectoryEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name="file")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class File {
+public class FileEntity {
 
     // TODO: Change to composite key (Filesystem UUID + File id)
     @Id
@@ -38,7 +38,7 @@ public class File {
 
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_directory_id")
-    private Directory parentDirectory;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "parent_directory_id")
+    // private DirectoryEntity parentDirectory;
 }
