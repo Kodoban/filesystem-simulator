@@ -69,7 +69,7 @@ public class DirectoryRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteFilesystem(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteDirectory(@PathVariable("id") Integer id) {
         directoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

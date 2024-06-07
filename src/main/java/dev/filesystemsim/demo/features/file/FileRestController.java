@@ -74,7 +74,7 @@ public class FileRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteFilesystem(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteFile(@PathVariable("id") Integer id) {
         fileService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
