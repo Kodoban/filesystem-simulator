@@ -36,7 +36,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public FileDto update(Integer id, @Valid FileDto fileDto) {
+    public FileDto update(Integer id, FileDto fileDto) {
         FileEntity fileEntity = fileMapper.mapDtoToEntity(fileDto);
         FileEntity savedFileEntity = fileRepository.findById(id).map(existingFile -> {
                 Optional.ofNullable(fileEntity.getName()).ifPresent(existingFile::setName);

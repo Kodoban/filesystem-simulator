@@ -11,7 +11,7 @@ public interface FileService {
 
     Optional<FileDto> getFileById(Integer id);
 
-    FileDto update(Integer id, @Valid FileDto fileDto);
+    FileDto update(Integer id, FileDto fileDto);
 
     void delete(Integer id);
 
