@@ -52,6 +52,8 @@ public class DashboardViewController {
         try {
             ResponseEntity<FilesystemDto> filesystem = filesystemRestController.createFilesystem(filesystemDto);
             model.addAttribute("filesystem", filesystem.getBody());
+            model.addAttribute("redirectPage", UrlMapping.FILESYSTEM_CONTROLLER_URL);
+            // model.addAttribute("redirectPage", "system");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -11,7 +11,7 @@ public class UrlMapping {
     public static final String AUTH_CONTROLLER_URL = "/auth";
     public static final String DASHBOARD_CONTROLLER_URL = "/dashboard";
     public static final String FILE_CONTROLLER_URL = "/file";
-    public static final String FILESYSTEM_CONTROLLER_URL = "/filesystem";
+    public static final String FILESYSTEM_CONTROLLER_URL = "/system";
     public static final String USER_CONTROLLER_URL = "/users";
     public static final String DIRECTORY_CONTROLLER_URL = "/directory";
     public static final String HOME_DIRECTORY_CONTROLLER_URL = "/home-directory";

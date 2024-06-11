@@ -96,6 +96,6 @@ function _removePopup() {
     }
 }
 
-function openFilesystemPage(uuid) {
-
+function openFilesystemPage(uuid, baseUrl) {
+    window.open(`${baseUrl}/${uuid}`, "_blank");
 }

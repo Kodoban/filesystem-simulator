@@ -1,0 +1,30 @@
+.blurrable.active {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+}
+  
+.popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
+    visibility: hidden;
+    opacity: 0;
+    transition: 400ms;
+    border-radius: 25px;
+    background-color: inherit;
+}
+  
+.popup.active {
+    visibility: visible;
+    top: 40%;
+    opacity: 1;
+    transition: 400ms;
+}

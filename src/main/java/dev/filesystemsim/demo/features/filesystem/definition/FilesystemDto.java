@@ -22,7 +22,6 @@ public class FilesystemDto {
     private String name;
     
     @JsonAlias("user")
-    @JsonIncludeProperties({ "name" })
     private UserDto owner;
 
     @JsonAlias("home")

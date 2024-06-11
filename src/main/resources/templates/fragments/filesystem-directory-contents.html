@@ -1,0 +1,56 @@
+<div th:fragment="listDirectoryContents" class="current-directory" data-th-directory-id="${directory.id}">
+    <ul class="list-group list-group-flush" id="dirContents">
+        <th:block th:each="file : ${directory.files}">
+            <th:block th:replace="~{::dirListFileEntry}">
+
+            </th:block>
+        </th:block>
+        
+        <!-- <div class="d-flex align-items-center justify-content-right">
+            <button type="button" name="open" class="btn btn-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="openFilesystemPage(this.getAttribute('filesystem-uuid'))">Open</button>
+            <button type="button" name="delete" class="btn btn-outline-danger" 
+                data-th-filesystem-uuid="${filesystem.uuid}" data-th-filesystem-name="${filesystem.name}" 
+                onclick="raiseDeleteFilesystemPopup(this.getAttribute('filesystem-uuid'), this.getAttribute('filesystem-name'))">
+                Delete
+            </button>
+        </div> -->
+    </ul>
+</div>
+
+<div th:fragment="fileCreatePopupFragment" id="popupForm">
+    <h3 id="popupHeader">Create a new file/directory</h3>
+    <p id="popupText">Enter the required details</p>
+
+    <!-- Change value to dynamic user value -->
+    <!-- <input id="parentDirId" name="parent_dir" data-th-value="${parent.id}" hidden="true"> -->
+    <div id="filetype">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeFile" value="file" checked>
+            <label class="form-check-label" for="filetypeFile">File</label>
+        </div>    
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeDirectory" value="directory">
+            <label class="form-check-label" for="filetypeDirectory">Directory</label>
+        </div>    
+    </div>
+    <textarea id="fileName" name="fileName" class="form-control" placeholder="Enter a name for the new file/directory"></textarea>
+    <button type="submit" id="createFileBtn" name="create" class="btn btn-primary" onclick="createFile()">Create</button>
+    <button type="button" id="cancelPopup" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
+</div>
+
+<div th:fragment="filesystemDeletePopupFragment" id="popupForm">
+    <h3 id="popupHeader">Delete the filesystem?</h3>
+    <p id="popupText">You are about to delete this filesystem. This action is not reversible. Proceed?</p>
+
+    <!-- <input name="filesystem_uuid" th:value="${filesystem.uuid}" hidden="true">
+    <input name="filesystem_name" th:value="${filesystem.name}" hidden="true"> -->
+    <button type="submit" id="deleteFilesystemBtn" name="delete" class="btn btn-outline-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="deleteFilesystem(this.getAttribute('filesystem-uuid'))">Delete</button>
+    <button type="button" id="cancelPopupBtn" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
+</div>
+
+
+<li th:id="${file.id}" class="list-group-item d-flex" th:fragment="dirListFileEntry">
+    <div th:text="${file.name}">
+
+    </div>
+</li>

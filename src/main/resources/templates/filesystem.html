@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <th:block th:replace="~{fragments/base :: head (title=${filesystem.name})}"></th:block>
+    <th:block th:fragment="~{fragments/base :: additionalCss}">
+        <link rel="stylesheet" th:href="@{/css/filesystem.css}">
+    </th:block>
+    <th:block th:fragment="~{fragments/base :: additionalJs}">
+        <script th:src="@{/js/filesystem.js}"></script>
+    </th:block>
+
+    <body>
+        <th:block th:replace="~{fragments/header :: header}" class="blurrable"></th:block>
+        <main th:fragment="~{fragments/base :: mainContent}" class="blurrable content d-flex-column align-items-center justify-content-left">
+            
+            <div class="d-flex justify-content-between align-items-center bg-light p-3" th:fragment="title-bar">
+                <div class="title" data-th-directory-id="${directory.id}" th:text="${directory.name}"></div>
+                <button class="btn btn-primary" id="createFileButton" onclick="raiseCreateFilePopup()">Create file/directory</button>
+            </div>
+            <th:block th:replace="~{fragments/filesystem-directory-contents :: listDirectoryContents}"></th:block>
+            
+        </main>
+
+        <div id="filePopup" class="popup"></div>
+    </body>
+
+</html>

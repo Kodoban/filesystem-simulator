@@ -22,8 +22,16 @@
 <li th:fragment="newFilesystemFragment" th:id="${filesystem.uuid}" class="filesystem-list-item list-group-item d-flex align-items-center justify-content-between">
     <p th:text="${filesystem.name}"></p>
     <div class="d-flex align-items-center justify-content-right">
-        <button type="button" name="open" class="btn btn-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="openFilesystemPage(this.getAttribute('filesystem-uuid'))">Open</button>
-        <button type="button" name="delete" class="btn btn-outline-danger" 
+        <button type="button" name="open" class="btn btn-primary" th:text="Open"
+            data-th-filesystem-uuid="${filesystem.uuid}"
+            data-th-filesystem-page="${redirectPage}"
+            onclick="openFilesystemPage(
+                this.getAttribute('filesystem-uuid'),
+                this.getAttribute('filesystem-page')
+            )">
+            Open
+        </button>
+        <button type="button" name="delete" class="btn btn-outline-danger" th:text="Delete"
             data-th-filesystem-uuid="${filesystem.uuid}" data-th-filesystem-name="${filesystem.name}" 
             onclick="raiseDeleteFilesystemPopup(this.getAttribute('filesystem-uuid'), this.getAttribute('filesystem-name'))">
             Delete
