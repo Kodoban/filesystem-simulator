@@ -38,19 +38,32 @@
     <button type="button" id="cancelPopup" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
 </div>
 
-<div th:fragment="filesystemDeletePopupFragment" id="popupForm">
-    <h3 id="popupHeader">Delete the filesystem?</h3>
-    <p id="popupText">You are about to delete this filesystem. This action is not reversible. Proceed?</p>
+<!-- TODO: Raise popup only on starred files/directories -->
+<!-- <div th:fragment="fileDeletePopupFragment" id="popupForm">
+    <h3 id="popupHeader">Delete the item</h3>
+    <p id="popupText">You are about to delete this item. This action is not reversible. Proceed?</p>
 
-    <!-- <input name="filesystem_uuid" th:value="${filesystem.uuid}" hidden="true">
-    <input name="filesystem_name" th:value="${filesystem.name}" hidden="true"> -->
-    <button type="submit" id="deleteFilesystemBtn" name="delete" class="btn btn-outline-primary" data-th-filesystem-uuid="${filesystem.uuid}" onclick="deleteFilesystem(this.getAttribute('filesystem-uuid'))">Delete</button>
+    <button type="submit" id="deleteFileBtn" name="delete" class="btn btn-outline-primary" data-th-file-id="${file.id}" onclick="deleteFile(this.getAttribute('file-id'))">Delete</button>
     <button type="button" id="cancelPopupBtn" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
-</div>
+</div> -->
 
 
-<li th:id="${file.id}" class="list-group-item d-flex" th:fragment="dirListFileEntry">
-    <div th:text="${file.name}">
-
+<li th:id="${file.id}" data-th-file-type="${file.type}" class="list-group-item d-flex align-items-center justify-content-between" th:fragment="dirListFileEntry">
+    <div class="d-flex align-items-center">
+        <th:block th:switch="${file.type.name()}">
+            <img th:case="FILE" th:src="@{/icons/file.svg}" class="icon">
+            <img th:case="DIRECTORY" th:src="@{/icons/directory.svg}" class="icon">
+            <img th:case="HOME_DIRECTORY" th:src="@{/icons/home-directory.svg}" class="icon">
+            <img th:case="*" th:src="@{/icons/unknown.svg}">
+        </th:block>        
+        <div th:text="${file.name}"></div>
+    </div>
+    <div class="d-flex align-items-center justify-content-right">
+        <!-- TODO: Add update button, differentiate between file/dir -->
+        <button type="button" name="delete" class="btn btn-outline-danger" th:text="Delete"
+            data-th-file-id="${file.id}"
+            onclick="deleteFile(this.getAttribute('file-id'))">
+            Delete
+        </button>
     </div>
 </li>

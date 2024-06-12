@@ -2,9 +2,11 @@ package dev.filesystemsim.demo.features.filesystem;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +49,22 @@ public class FilesystemViewController {
         return "fragments/filesystem-directory-contents :: fileCreatePopupFragment";
     }
 
+    // @GetMapping("/popup-delete-file/{id}") 
+    // public String getDeleteFilePopup(@PathVariable("id") Integer id, Model model) {
+    //     ResponseEntity<FileDto> file = fileRestController.getFileById(id);
+    //     model.addAttribute("file", file.getBody());
+
+    //     return "fragments/filesystem-directory-contents :: fileDeletePopupFragment";
+    // }
+
+    // @GetMapping("/popup-delete-dir/{id}") 
+    // public String getDeleteDirectoryPopup(@PathVariable("id") Integer id, Model model) {
+    //     ResponseEntity<DirectoryDto> directory = directoryRestController.getDirectoryById(id);
+    //     model.addAttribute("file", directory.getBody());
+
+    //     return "fragments/filesystem-directory-contents :: fileDeletePopupFragment";
+    // }
+
     @PostMapping("/file")
     public String createFile(@Valid @RequestBody FileDto fileDto, Model model) {
 
@@ -67,12 +85,26 @@ public class FilesystemViewController {
 
         try {
             ResponseEntity<DirectoryDto> directory = directoryRestController.createDirectory(directoryDto);
-            model.addAttribute("directory", directory.getBody());
+            // model.addAttribute("directory", directory.getBody());
+            model.addAttribute("file", directory.getBody());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "fragments/filesystem-directory-contents :: dirListFileEntry"; 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteFilesystemObject(@PathVariable("id") Integer id) {
+        
+        ResponseEntity<HttpStatus> deletedObjectStatus = fileRestController.deleteFile(id);
+        if (deletedObjectStatus.getStatusCode().is2xxSuccessful()) {
+            return ResponseEntity.ok("Item deleted successfully"); 
+        }
+
+        return ResponseEntity
+                .status(deletedObjectStatus.getStatusCode())
+                .body(deletedObjectStatus.getStatusCode().toString());
     }
 
     // @GetMapping("/{id}")

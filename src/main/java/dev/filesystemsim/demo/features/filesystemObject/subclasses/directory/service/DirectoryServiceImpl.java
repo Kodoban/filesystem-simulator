@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import dev.filesystemsim.demo.features.filesystemObject.Filetype;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.DirectoryRepository;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.definition.DirectoryDto;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.definition.DirectoryEntity;
@@ -23,6 +24,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Override
     public DirectoryDto save(DirectoryDto directoryDto) {
         DirectoryEntity directoryEntity = directoryMapper.mapDtoToEntity(directoryDto);
+        directoryEntity.setType(Filetype.DIRECTORY);
         DirectoryEntity savedDirectoryEntity = directoryRepository.save(directoryEntity);
         return directoryMapper.mapEntityToDto(savedDirectoryEntity);
     }

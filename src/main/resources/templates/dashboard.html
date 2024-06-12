@@ -20,9 +20,7 @@
                 <button class="btn btn-primary" id="createFilesystemButton" onclick="raiseCreateFilesystemPopup()">Create filesystem</button>
             </div>
 
-            <ul id="filesystems" class="list-group list-group-flush">
-
-            </ul>
+            <th:block th:replace="~{fragments/filesystem-fragments :: listFilesystems}"></th:block>
             
             <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col" th:if="${#lists.isEmpty(myImages)}">

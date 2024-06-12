@@ -19,6 +19,16 @@
     <button type="button" id="cancelPopupBtn" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
 </div>
 
+<div th:fragment="listFilesystems">
+    <ul id="filesystems" class="list-group list-group-flush">
+        <th:block th:each="filesystem: ${filesystems}">
+            <th:block th:replace="~{::newFilesystemFragment}">
+
+            </th:block>
+        </th:block>
+    </ul>
+</div>
+
 <li th:fragment="newFilesystemFragment" th:id="${filesystem.uuid}" class="filesystem-list-item list-group-item d-flex align-items-center justify-content-between">
     <p th:text="${filesystem.name}"></p>
     <div class="d-flex align-items-center justify-content-right">

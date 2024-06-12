@@ -1,5 +1,6 @@
 package dev.filesystemsim.demo.features.dashboard;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,10 @@ public class DashboardViewController {
 
     @GetMapping
     public String getDashboard(Model model) {
+        // TODO: Get filesystems by owner once auth system implemented
+        List<FilesystemDto> filesystems = filesystemRestController.getAllFilesystems();
+        model.addAttribute("filesystems", filesystems);
+        model.addAttribute("redirectPage", UrlMapping.FILESYSTEM_CONTROLLER_URL);
         return "dashboard"; 
     }
 

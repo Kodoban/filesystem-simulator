@@ -4,10 +4,6 @@ function _raisePopup(aUrl) {
     $.ajax({
         type: "GET",
         url: aUrl,
-        // data: JSON.stringify({
-        //         "parent": {
-        //             "id": $("#parentDirId").val()
-        //     }
 
         success: function(response) {
             $('#filePopup').append(response)
@@ -27,9 +23,9 @@ function raiseCreateFilePopup() {
     _raisePopup("/system/popup-create-file");
 }
 
-function raiseDeleteFilesystemPopup(id) {
-    _raisePopup(`/system/popup-delete-file/${id}`);
-}
+// function raiseDeleteFilePopup(id) {
+//     _raisePopup(`/system/popup-delete-file/${id}`);
+// }
 
 function cancelPopupAction() {
     _removePopup();
@@ -94,4 +90,21 @@ function createFile() {
         }
     });
 
+}
+
+function deleteFile(id) {
+
+    $.ajax({
+        type: "DELETE",
+        url: `/system/${id}`,
+        contentType: "application/json; charset=utf-8",
+
+        success: function(response) {
+            $(`#${id}`).remove();
+
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
 }

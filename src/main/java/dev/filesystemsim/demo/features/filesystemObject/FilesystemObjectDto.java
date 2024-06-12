@@ -17,6 +17,7 @@ public abstract class FilesystemObjectDto {
 
     private Integer id;
     private String name;
+    private Filetype type;
 
     @JsonAlias({"parent"})
     @JsonIncludeProperties({ "id" })

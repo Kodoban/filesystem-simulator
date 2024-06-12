@@ -59,3 +59,4 @@ build/
 
 # Custom
 .stfolder/
+src/main/resources/static/icons

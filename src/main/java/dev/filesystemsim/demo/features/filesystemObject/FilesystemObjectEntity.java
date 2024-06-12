@@ -2,6 +2,8 @@ package dev.filesystemsim.demo.features.filesystemObject;
 
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.definition.DirectoryEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +32,12 @@ public abstract class FilesystemObjectEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull @NotBlank
+    @NotBlank
     private String name;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Filetype type;
 
     @ManyToOne
     // @ManyToOne(cascade = CascadeType.ALL)

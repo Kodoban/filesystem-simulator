@@ -13,9 +13,8 @@ import dev.filesystemsim.demo.features.filesystem.FilesystemRepository;
 import dev.filesystemsim.demo.features.filesystem.definition.FilesystemDto;
 import dev.filesystemsim.demo.features.filesystem.definition.FilesystemEntity;
 import dev.filesystemsim.demo.features.filesystem.mapper.FilesystemMapper;
-import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.subclasses.homeDirectory.definition.HomeDirectoryDto;
+import dev.filesystemsim.demo.features.filesystemObject.Filetype;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.subclasses.homeDirectory.definition.HomeDirectoryEntity;
-import dev.filesystemsim.demo.features.filesystemObject.subclasses.directory.subclasses.homeDirectory.service.HomeDirectoryService;
 import dev.filesystemsim.demo.features.user.definition.UserEntity;
 import dev.filesystemsim.demo.features.user.service.UserService;
 
@@ -24,19 +23,15 @@ public class FilesystemServiceImpl implements FilesystemService {
 
     private final FilesystemRepository filesystemRepository;
     private final UserService userService;
-    private final HomeDirectoryService homeDirectoryService;
     private final FilesystemMapper filesystemMapper;
 
-    public FilesystemServiceImpl(FilesystemRepository filesystemRepository, UserService userService, 
-        FilesystemMapper filesystemMapper, HomeDirectoryService homeDirectoryService) {
+    public FilesystemServiceImpl(FilesystemRepository filesystemRepository, UserService userService, FilesystemMapper filesystemMapper) {
             this.filesystemRepository = filesystemRepository;
             this.userService = userService;
-            this.homeDirectoryService = homeDirectoryService;
             this.filesystemMapper = filesystemMapper;
     }
 
     @Override
-    // TODO: Also create home directory before saving
     public FilesystemEntity save(FilesystemDto filesystemDto) throws Exception {
 
         Optional<UserEntity> user = userService.getUser(filesystemDto.getOwner().getId());
@@ -47,6 +42,7 @@ public class FilesystemServiceImpl implements FilesystemService {
             filesystemEntity.setHomeDirectory(
                 HomeDirectoryEntity.builder()
                     .name("home")
+                    .type(Filetype.HOME_DIRECTORY)
                     .build()
             );
             FilesystemEntity savedFilesystemEntity = filesystemRepository.save(filesystemEntity);

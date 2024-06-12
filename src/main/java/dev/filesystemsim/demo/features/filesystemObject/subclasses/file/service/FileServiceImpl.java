@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import dev.filesystemsim.demo.features.filesystemObject.Filetype;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.file.FileRepository;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.file.definition.FileDto;
 import dev.filesystemsim.demo.features.filesystemObject.subclasses.file.definition.FileEntity;
@@ -23,12 +24,20 @@ public class FileServiceImpl implements FileService {
     @Override
     public FileDto save(FileDto fileDto) {
         FileEntity fileEntity = fileMapper.mapDtoToEntity(fileDto);
+        fileEntity.setType(Filetype.FILE);
         FileEntity savedFileEntity = fileRepository.save(fileEntity);
         return fileMapper.mapEntityToDto(savedFileEntity);
     }
 
     @Override
     public Optional<FileDto> getFileById(Integer id) {
+        // return fileRepository.findById(id).flatMap( file -> {
+        //     return file.getType() == Filetype.FILE ?
+        //         Optional.of(fileMapper.mapEntityToDto(file)) :
+        //         Optional.empty();
+        // }
+        // );
+
         return fileRepository.findById(id).map(
             fileMapper::mapEntityToDto
         );

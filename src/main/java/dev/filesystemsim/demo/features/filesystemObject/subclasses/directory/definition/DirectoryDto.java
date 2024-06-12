@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper=true)
 public class DirectoryDto extends FilesystemObjectDto {
 
-    @JsonIncludeProperties({ "id", "name" })
+    @JsonIncludeProperties({ "id", "name", "type" })
     private List<FileDto> files;
     
 }
