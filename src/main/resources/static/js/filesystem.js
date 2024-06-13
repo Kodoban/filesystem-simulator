@@ -55,7 +55,7 @@ function createFile() {
     switch( $('input[name="filetypeOptions"]:checked').val() ) {
         case 'file':
             postUrl = "/system/file";
-            content = "Some content for now, add later";
+            content = $("#fileContent").val();
             break;
 
         case 'directory':
@@ -107,4 +107,13 @@ function deleteFile(id) {
             console.log(error);
         }
     })
+}
+
+function filetypeOptionChanged(option) {
+    let fileContentTextarea = $("#fileContent");
+    if (option === "file") {
+        fileContentTextarea.show();
+    } else {
+        fileContentTextarea.hide();
+    }
 }

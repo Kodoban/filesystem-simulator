@@ -25,15 +25,16 @@
     <!-- <input id="parentDirId" name="parent_dir" data-th-value="${parent.id}" hidden="true"> -->
     <div id="filetype">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeFile" value="file" checked>
+            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeFile" value="file" onchange="filetypeOptionChanged(this.getAttribute('value'))" checked>
             <label class="form-check-label" for="filetypeFile">File</label>
         </div>    
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeDirectory" value="directory">
+            <input class="form-check-input" type="radio" name="filetypeOptions" id="filetypeDirectory" value="directory" onchange="filetypeOptionChanged(this.getAttribute('value'))">
             <label class="form-check-label" for="filetypeDirectory">Directory</label>
         </div>    
     </div>
     <textarea id="fileName" name="fileName" class="form-control" placeholder="Enter a name for the new file/directory"></textarea>
+    <textarea id="fileContent" name="fileContent" class="form-control" placeholder="Enter the contents of the file"></textarea>
     <button type="submit" id="createFileBtn" name="create" class="btn btn-primary" onclick="createFile()">Create</button>
     <button type="button" id="cancelPopup" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
 </div>
