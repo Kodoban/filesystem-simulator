@@ -1,5 +1,9 @@
 'use strict'
 
+$('#dirContents').on('click', 'li.clickable[file-type=FILE]', function() {
+    $(this).find(".file-content").toggle();
+});
+
 function _raisePopup(aUrl) {
     $.ajax({
         type: "GET",
@@ -43,7 +47,7 @@ function _removePopup() {
 
 function createFile() {
 
-    if ($.trim($("#fileName").val()) === "") {
+    if ($.trim($("#newFileName").val()) === "") {
         $("#popupText").after(
             "<p>Filename cannot be empty</p>"
         );
@@ -55,7 +59,7 @@ function createFile() {
     switch( $('input[name="filetypeOptions"]:checked').val() ) {
         case 'file':
             postUrl = "/system/file";
-            content = $("#fileContent").val();
+            content = $("#newFileContent").val();
             break;
 
         case 'directory':
@@ -73,7 +77,7 @@ function createFile() {
         contentType: "application/json; charset=utf-8",
         // content is ignored for directory, TODO: Check if it's recommended to do it this way
         data: JSON.stringify({
-            "name": $("#fileName").val(),
+            "name": $("#newFileName").val(),
             "parent": {
                 "id": $("div.current-directory").attr("directory-id")
             },
@@ -110,7 +114,7 @@ function deleteFile(id) {
 }
 
 function filetypeOptionChanged(option) {
-    let fileContentTextarea = $("#fileContent");
+    let fileContentTextarea = $("#newFileContent");
     if (option === "file") {
         fileContentTextarea.show();
     } else {

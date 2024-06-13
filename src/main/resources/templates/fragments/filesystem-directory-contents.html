@@ -17,6 +17,7 @@
     </ul>
 </div>
 
+<!-- TODO: https://getbootstrap.com/docs/5.3/components/modal/#vertically-centered -->
 <div th:fragment="fileCreatePopupFragment" id="popupForm">
     <h3 id="popupHeader">Create a new file/directory</h3>
     <p id="popupText">Enter the required details</p>
@@ -33,8 +34,8 @@
             <label class="form-check-label" for="filetypeDirectory">Directory</label>
         </div>    
     </div>
-    <textarea id="fileName" name="fileName" class="form-control" placeholder="Enter a name for the new file/directory"></textarea>
-    <textarea id="fileContent" name="fileContent" class="form-control" placeholder="Enter the contents of the file"></textarea>
+    <textarea id="newFileName" name="newFileName" class="form-control" placeholder="Enter a name for the new file/directory"></textarea>
+    <textarea id="newFileContent" name="newFileContent" class="form-control" placeholder="Enter the contents of the file"></textarea>
     <button type="submit" id="createFileBtn" name="create" class="btn btn-primary" onclick="createFile()">Create</button>
     <button type="button" id="cancelPopup" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
 </div>
@@ -48,23 +49,31 @@
     <button type="button" id="cancelPopupBtn" class="btn btn-danger" onclick="cancelPopupAction()">Cancel</button>
 </div> -->
 
+<!-- TODO: for dirs https://getbootstrap.com/docs/5.3/helpers/stretched-link/ -->
 
-<li th:id="${file.id}" data-th-file-type="${file.type}" class="list-group-item d-flex align-items-center justify-content-between" th:fragment="dirListFileEntry">
-    <div class="d-flex align-items-center">
-        <th:block th:switch="${file.type.name()}">
-            <img th:case="FILE" th:src="@{/icons/file.svg}" class="icon">
-            <img th:case="DIRECTORY" th:src="@{/icons/directory.svg}" class="icon">
-            <img th:case="HOME_DIRECTORY" th:src="@{/icons/home-directory.svg}" class="icon">
-            <img th:case="*" th:src="@{/icons/unknown.svg}">
-        </th:block>        
-        <div th:text="${file.name}"></div>
+<li th:id="${file.id}" data-th-file-type="${file.type}" class="clickable list-group-item d-flex flex-column justify-content-between" th:fragment="dirListFileEntry">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <th:block th:switch="${file.type.name()}">
+                <img th:case="FILE" th:src="@{/icons/file.svg}" class="icon">
+                <img th:case="DIRECTORY" th:src="@{/icons/directory.svg}" class="icon">
+                <img th:case="HOME_DIRECTORY" th:src="@{/icons/home-directory.svg}" class="icon">
+                <img th:case="*" th:src="@{/icons/unknown.svg}">
+            </th:block>        
+            <div th:text="${file.name}"></div>
+        </div>
+        <div class="d-flex align-items-center justify-content-right">
+            <!-- TODO: Add update button, differentiate between file/dir -->
+            <button type="button" name="delete" class="btn btn-outline-danger" th:text="Delete"
+                data-th-file-id="${file.id}"
+                onclick="deleteFile(this.getAttribute('file-id'))">
+                Delete
+            </button>
+        </div>
     </div>
-    <div class="d-flex align-items-center justify-content-right">
-        <!-- TODO: Add update button, differentiate between file/dir -->
-        <button type="button" name="delete" class="btn btn-outline-danger" th:text="Delete"
-            data-th-file-id="${file.id}"
-            onclick="deleteFile(this.getAttribute('file-id'))">
-            Delete
-        </button>
+    <div th:if="${file.type.name() == 'FILE'}" class="file-content">
+        <textarea th:text="${file.content}"></textarea>
     </div>
 </li>
+    
+
